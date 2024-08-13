@@ -82,18 +82,18 @@ public class Janela {
 		digitaMes = new JTextField();
 		digitaMes.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		digitaMes.setColumns(10);
-		digitaMes.setBounds(99, 167, 58, 41);
+		digitaMes.setBounds(99, 167, 43, 41);
 		frame.getContentPane().add(digitaMes);
 		
 		JLabel barra2 = new JLabel("/");
 		barra2.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		barra2.setBounds(167, 167, 16, 41);
+		barra2.setBounds(152, 167, 16, 41);
 		frame.getContentPane().add(barra2);
 		
 		digitaAno = new JTextField();
 		digitaAno.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		digitaAno.setColumns(10);
-		digitaAno.setBounds(193, 167, 76, 41);
+		digitaAno.setBounds(178, 167, 76, 41);
 		frame.getContentPane().add(digitaAno);
 		
 		recebeDia = new JLabel("");
@@ -108,17 +108,17 @@ public class Janela {
 		
 		recebeMes = new JLabel("");
 		recebeMes.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		recebeMes.setBounds(406, 167, 58, 41);
+		recebeMes.setBounds(406, 167, 43, 41);
 		frame.getContentPane().add(recebeMes);
 		
 		JLabel barra4 = new JLabel("/");
 		barra4.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		barra4.setBounds(474, 167, 16, 41);
+		barra4.setBounds(459, 167, 16, 41);
 		frame.getContentPane().add(barra4);
 		
 		recebeAno = new JLabel("");
 		recebeAno.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		recebeAno.setBounds(500, 167, 76, 41);
+		recebeAno.setBounds(485, 167, 76, 41);
 		frame.getContentPane().add(recebeAno);
 		
 		recebeEmail = new JLabel("");
@@ -156,7 +156,7 @@ public class Janela {
 		
 		recebeNome = new JLabel("");
 		recebeNome.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		recebeNome.setBounds(416, 63, 160, 41);
+		recebeNome.setBounds(327, 63, 249, 41);
 		frame.getContentPane().add(recebeNome);
 		
 		JLabel indicaDataNascimento = new JLabel("Data De Nascimento");
@@ -266,7 +266,7 @@ public class Janela {
 				
 				else if (ValidaCPF.isCPF(cpf) == true) {	
 					
-					recebeCPF.setText(cpf);
+					recebeCPF.setText(ValidaCPF.imprimeCPF(cpf));
 				}
 				 
 				else if(ValidaCPF.isCPF(cpf) == false){
