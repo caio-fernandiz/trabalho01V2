@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
 import java.util.regex.Pattern;
 import java.awt.event.ActionEvent;
 import trabalho01V2.ValidaCPF;
-import trabalho01V2.Limitador;
+
 
 public class Janela {
 
@@ -67,13 +67,7 @@ public class Janela {
 	public Janela() {
 		initialize();
 		
-		digitaNome.setDocument(new Limitador(40, Limitador.TipoEntrada.NOME));
-		digitaDia.setDocument(new Limitador(2, Limitador.TipoEntrada.DIA));
-		digitaDia.setDocument(new Limitador(2, Limitador.TipoEntrada.MES));
-		digitaDia.setDocument(new Limitador(4, Limitador.TipoEntrada.ANO));
-		digitaEmail.setDocument(new Limitador(40, Limitador.TipoEntrada.EMAIL));
-		digitaCpf.setDocument(new Limitador(11, Limitador.TipoEntrada.CPF));
-		
+
 		JLabel barra1 = new JLabel("/");
 		barra1.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		barra1.setBounds(73, 167, 16, 41);
@@ -197,16 +191,7 @@ public class Janela {
 			public void actionPerformed(ActionEvent e) {
 				
 				nome = digitaNome.getText();
-				
-				if(nome.equals("")) {
-					JOptionPane.showMessageDialog(null, "Você precisa informar seu nome");
-				}
-				
-				else if (!nome.equals("")){
-					
-				recebeNome.setText(nome);
-				}
-				
+		
 				dia = digitaDia.getText();
 				mes = digitaMes.getText();
 				ano = digitaAno.getText();
@@ -215,64 +200,53 @@ public class Janela {
 				
 				resultadoIdade = 2024 - anoInt;
 				
-				if(resultadoIdade < 18 || resultadoIdade > 90) {
-					JOptionPane.showMessageDialog(null, "Idade invalida");
-				}
-				
-				if(digitaDia.equals("")) {
-					JOptionPane.showMessageDialog(null, "Você precisa informar o dia");
-				}
-				
-				else if(digitaMes.equals("")) {
-					JOptionPane.showMessageDialog(null, "Você precisa informar o mes");
-				}
-				
-				else if(digitaAno.equals("")) {
-					JOptionPane.showMessageDialog(null, "Você precisa informar o ano");
-				}
-				
-				else if(resultadoIdade >= 18 || resultadoIdade < 90) {
-					recebeDia.setText(dia);
-					recebeMes.setText(mes);
-					recebeAno.setText(ano);
-				}
-				
 				email = digitaEmail.getText();
-				
-				
-				
-				if(email.equals("")) {
-					
-					JOptionPane.showMessageDialog(null, "Você precisa informar o seu e-mail");
-				}
-				
-				else if (!isValidEmail(email)) {
-					
-					JOptionPane.showMessageDialog(null, "Email inválido");
-		        } 
-				
-				else if(isValidEmail(email)) {
-					
-					recebeEmail.setText(email);
-		        } 
 				
 				cpf = digitaCpf.getText();
 				
-				
-				if(cpf.equals("")) {
+				if(nome.equals("" ) || dia.equals("") || mes.equals("") || ano.equals("") || email.equals("") || cpf.equals("")) {
 					
-					JOptionPane.showMessageDialog(null, "Informe seu CPF");
+					JOptionPane.showMessageDialog(null, "Falta informação");
 				}
 				
-				else if (ValidaCPF.isCPF(cpf) == true) {	
-					
-					recebeCPF.setText(ValidaCPF.imprimeCPF(cpf));
+				else {
+						if(nome.matches("[\\p{L} ]+") 
+						&& dia.matches("[0-9]+") && mes.matches("[0-9]+") && ano.matches("[0-9]+") && resultadoIdade >= 18 && resultadoIdade <90
+						&& isValidEmail(email)
+						&& ValidaCPF.isCPF(cpf)) {
+							
+							recebeNome.setText(nome);
+							
+							recebeDia.setText(dia);
+							recebeMes.setText(mes);
+							recebeAno.setText(ano);
+							
+							recebeEmail.setText(email);
+							
+							recebeCPF.setText(ValidaCPF.imprimeCPF(cpf));
+						}
+						
+						if(!nome.matches("[\\p{L} ]+")) {
+							
+							JOptionPane.showMessageDialog(null, "Nome inválido");
+						}
+						
+						if(!dia.matches("[0-9]+") || !mes.matches("[0-9]+") || !ano.matches("[0-9]+") || resultadoIdade < 18) {
+							
+							JOptionPane.showMessageDialog(null, "Data inválida");
+						}
+						
+						if(!isValidEmail(email)) {
+							
+							JOptionPane.showMessageDialog(null, "E-mail inválido");
+						}
+						
+						if(!ValidaCPF.isCPF(cpf)) {
+							JOptionPane.showMessageDialog(null, "CPF inválido");
+						}
+						
 				}
-				 
-				else if(ValidaCPF.isCPF(cpf) == false){
-					
-					JOptionPane.showMessageDialog(null, "CPF inválido, digite novamente");
-				}
+				
 				
 			}
 		});
