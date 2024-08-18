@@ -1,17 +1,15 @@
 package trabalho01V2;
 
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.regex.Pattern;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.util.regex.Pattern;
-import java.awt.event.ActionEvent;
-import trabalho01V2.ValidaCPF;
 
 
 public class Janela {
@@ -196,9 +194,7 @@ public class Janela {
 				mes = digitaMes.getText();
 				ano = digitaAno.getText();
 				
-				Integer anoInt = Integer.valueOf(ano);
-				
-				resultadoIdade = 2024 - anoInt;
+			
 				
 				email = digitaEmail.getText();
 				
@@ -209,29 +205,14 @@ public class Janela {
 					JOptionPane.showMessageDialog(null, "Falta informação");
 				}
 				
-				else {
-						if(nome.matches("[\\p{L} ]+") 
-						&& dia.matches("[0-9]+") && mes.matches("[0-9]+") && ano.matches("[0-9]+") && resultadoIdade >= 18 && resultadoIdade <90
-						&& isValidEmail(email)
-						&& ValidaCPF.isCPF(cpf)) {
-							
-							recebeNome.setText(nome);
-							
-							recebeDia.setText(dia);
-							recebeMes.setText(mes);
-							recebeAno.setText(ano);
-							
-							recebeEmail.setText(email);
-							
-							recebeCPF.setText(ValidaCPF.imprimeCPF(cpf));
-						}
-						
+				else {				
+										
 						if(!nome.matches("[\\p{L} ]+")) {
 							
 							JOptionPane.showMessageDialog(null, "Nome inválido");
 						}
 						
-						if(!dia.matches("[0-9]+") || !mes.matches("[0-9]+") || !ano.matches("[0-9]+") || resultadoIdade < 18) {
+						if(!dia.matches("[0-9]+") || !mes.matches("[0-9]+") || !ano.matches("[0-9]+")) {
 							
 							JOptionPane.showMessageDialog(null, "Data inválida");
 						}
@@ -245,6 +226,34 @@ public class Janela {
 							JOptionPane.showMessageDialog(null, "CPF inválido");
 						}
 						
+						else {
+					
+							int anoInt = Integer.valueOf(ano);
+				
+							resultadoIdade = 2024 - anoInt;
+							
+							if(resultadoIdade <18 || resultadoIdade >=90) {
+								
+								JOptionPane.showMessageDialog(null, "Data inválida");
+							}
+							
+							else if(nome.matches("[\\p{L} ]+") 
+									&& dia.matches("[0-9]+") && mes.matches("[0-9]+") && ano.matches("[0-9]+") && resultadoIdade >= 18 && resultadoIdade <90
+									&& isValidEmail(email)
+									&& ValidaCPF.isCPF(cpf)) {
+							
+								recebeNome.setText(nome);
+							
+								recebeDia.setText(dia);
+								recebeMes.setText(mes);
+								recebeAno.setText(ano);
+							
+								recebeEmail.setText(email);
+							
+								recebeCPF.setText(ValidaCPF.imprimeCPF(cpf));
+							}
+						}
+	
 				}
 				
 				
